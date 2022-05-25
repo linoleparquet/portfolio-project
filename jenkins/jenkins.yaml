@@ -1,0 +1,24 @@
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+          - basicSSHUserPrivateKey:
+              id: "413aa12b-1478-4dc4-a947-ae58dbc3e640"
+              privateKeySource:
+                directEntry:
+                  privateKey: ${readFile:/var/jenkins_home/jenkins_controller.key}
+              scope: SYSTEM
+              username: "jenkins"
+jenkins:
+  nodes:
+    - permanent:
+        labelString: "docker"
+        launcher:
+          ssh:
+            credentialsId: "413aa12b-1478-4dc4-a947-ae58dbc3e640"
+            host: "jenkins_agent_01"
+            port: 22
+            sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
+        name: "agent_01"
+        remoteFS: "/home/jenkins/"
+        retentionStrategy: "always"
