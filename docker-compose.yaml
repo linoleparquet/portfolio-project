@@ -2,20 +2,20 @@ version: "3.7"
 services:
   jenkins:
     container_name: jenkins_controller
-    build: jenkins/
-    privileged: true
-    user: root
+    build: jenkins/controller/
+    user: jenkins
     ports:
       - 8080:8080
       - 50000:50000
 
   agent:
     container_name: jenkins_agent_01
-    privileged: true
+    build: jenkins/agent_01/
     user: root
-    image: jenkins/ssh-agent:jdk11
     expose:
       - 22
     environment:
       # Correspond to the value of the file jenkins/ssh_key_pair/jenkins_controller.pub
       - JENKINS_AGENT_SSH_PUBKEY=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDBB+Ut4CVuPWl7S2LzaosULReelGHu59d4yHGUiIvUVLKseehjpbVGTvaqcqbltYqu8rba4Otsbe0O1wKA6RnFdwdjN5KTLl8OUO8Ox3P7v/791BB3WX+JOdZICGNALIOwbVjrllVkcfFgIvB9SIXwrIhvf82quowHLK7FvycQfIJaBsEScn4KPBrhpgtGmfBapWYMYlpr1OJDwUvlQF9x0f00GV5T6djhnb/Czj+BwJfNQP0FHkl+SQKsQTmj/KDneBWlx1YYHj/5/L2yH08TxZbxNc0pnDE0cpZflvySpwHRL7sjg7mpJKL2ck5xLPKRSc8rJx2sTwXMg1yVtC1NL8GJqaiB7feUm143XIYHOOAONy72SPEMAORSALLxr2UvVI5NQQaHYuT0ctVKV7WDT6kZXbeIKwYVBlv2f/Hg83QbTo1ZOIRTLL4narMXTrMWEqwGartqj7RWeH9zHvNCM+Qni1ieJky3K43BIWV/UW7M/KI/w9yh7sw19ILztoE= lino@lino-dell
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
