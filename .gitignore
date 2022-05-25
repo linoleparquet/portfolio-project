@@ -1,2 +1,3 @@
 .vagrant/
 .terraform*
+jenkins/controller/jenkins_controller.key
