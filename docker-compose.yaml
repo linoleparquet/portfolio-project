@@ -7,14 +7,17 @@ services:
     ports:
       - 8080:8080
       - 50000:50000
-
-  agent:
-    container_name: jenkins_agent_01
-    build: jenkins/agent_01/
-    user: root
-    expose:
-      - 22
     environment:
-      - JENKINS_AGENT_SSH_PUBKEY= #auto generated private key will come here
+      DOCKER_HOST: "tcp://dind:2375"
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+
+  dind:
+    image: docker:dind
+    user: root
+    privileged: true
+    container_name: dind
+    expose:
+      - 2375
+    environment:
+      DOCKER_TLS_CERTDIR: ""
