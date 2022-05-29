@@ -16,5 +16,6 @@ Repeat thoses steps to build the lior-backend image, with the content of `lior-b
 # TODO:
 
 - Tend on a unique reusable pipeline for front and back end build
-- Use Jenkins variables: registry, name, version of the build
+- Use Jenkinsfile variables: registry, name, version of the build
 - Automate the creation of the Jenkins pipelines
+- Use Jenkins agent
