@@ -21,3 +21,10 @@ services:
       - 2375
     environment:
       DOCKER_TLS_CERTDIR: ""
+    command: ["--insecure-registry=registry:5000"]
+
+  registry:
+    image: registry:2
+    container_name: registry
+    ports:
+      - 5000:5000
