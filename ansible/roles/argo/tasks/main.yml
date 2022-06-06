@@ -1,0 +1,46 @@
+# TODO: sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
+#      sudo chown vagrant:vagrant  ~/.kube/config
+
+- name: Ensure python3 is installed
+  become: yes
+  ansible.builtin.apt:
+    name:
+      - python3
+      - python3-pip
+    state: present
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Install kubernetes pip package
+  pip:
+    name: kubernetes
+    state: present
+
+- name: Create the Argo namespace
+  kubernetes.core.k8s:
+    name: argocd
+    api_version: v1
+    kind: Namespace
+    state: present
+    kubeconfig: /etc/rancher/k3s/k3s.yaml
+
+- name: Download ArgoCD manifest
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+    dest: ~/install-argo.yaml
+    mode: "0664"
+
+- name: Deploy ArgoCD
+  kubernetes.core.k8s:
+    state: present
+    src: ~/install-argo.yaml
+    namespace: argocd
+    kubeconfig: /etc/rancher/k3s/k3s.yaml
+
+- name: Download Argo CLI binary
+  get_url:
+    url: https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
+    dest: /usr/local/bin/argocd
+    owner: vagrant
+    group: vagrant
+    mode: 0755

@@ -1,0 +1,77 @@
+- name: Create namespace lior
+  kubernetes.core.k8s:
+    name: lior
+    api_version: v1
+    kind: Namespace
+    state: present
+    kubeconfig: /etc/rancher/k3s/k3s.yaml
+
+- name: Deploy Lior application
+  kubernetes.core.k8s:
+    kubeconfig: /etc/rancher/k3s/k3s.yaml
+    state: present
+    definition:
+      apiVersion: argoproj.io/v1alpha1
+      kind: Application
+      metadata:
+        name: lior
+        namespace: argocd
+      spec:
+        destination:
+          namespace: lior
+          server: "https://kubernetes.default.svc"
+        source:
+          path: helm
+          repoURL: "https://github.com/linoleparquet/lior"
+          targetRevision: "v0.1.1"
+          helm:
+            parameters:
+              - name: ingress.enabled
+                value: "true"
+        project: default
+
+- name: Wait till Argo is fully up
+  kubernetes.core.k8s_info:
+    kubeconfig: /etc/rancher/k3s/k3s.yaml
+    kind: Pod
+    wait: yes
+    namespace: argocd
+    wait_timeout: 360
+
+- name: Exposing Argo Service
+  kubernetes.core.k8s:
+    kubeconfig: /etc/rancher/k3s/k3s.yaml
+    state: patched
+    kind: Service
+    name: argocd-server
+    namespace: argocd
+    definition:
+      spec:
+        type: NodePort
+
+- name: Login into Argo
+  shell:
+    cmd: argocd login localhost:$(sudo kubectl get svc argocd-server -n argocd -o jsonpath={.spec.ports[0].nodePort}) --insecure --username admin --password $(sudo kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo)
+
+- name: Sync appplication
+  shell:
+    cmd: argocd app sync lior
+
+- name: Hiding Argo service
+  kubernetes.core.k8s:
+    kubeconfig: /etc/rancher/k3s/k3s.yaml
+    state: patched
+    kind: service
+    name: argocd-server
+    namespace: argocd
+    definition:
+      spec:
+        type: ClusterIP
+
+- name: Wait till Lior is fully up
+  kubernetes.core.k8s_info:
+    kubeconfig: /etc/rancher/k3s/k3s.yaml
+    kind: Pod
+    wait: yes
+    namespace: lior
+    wait_timeout: 360
