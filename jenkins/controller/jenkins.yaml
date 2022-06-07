@@ -5,3 +5,28 @@ jenkins:
       users:
         - id: admin
           password: admin
+jobs:
+  - script: |
+      job('init') {
+        description('Set up all jobs')
+          
+        scm {
+          git {
+            branches('*/main')
+            remote {
+              url('https://github.com/linoleparquet/jenkins-dsl.git')
+            }
+          }
+        }
+        steps {
+          dsl {
+            external('job_dsl.groovy')
+            removeAction('DELETE')
+            ignoreExisting(ignore = false)
+            removeViewAction('DELETE')
+          }
+        }
+        triggers {
+          cron('@midnight')
+        }
+      }
