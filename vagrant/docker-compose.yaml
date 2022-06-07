@@ -11,6 +11,8 @@ services:
       DOCKER_HOST: "tcp://dind:2375"
     volumes:
       - /usr/bin/docker:/usr/bin/docker
+    # Give access to the host netwoerk, in order to send Ansible command through SSH to the slaves
+    network_mode: host
 
   dind:
     image: docker:dind
