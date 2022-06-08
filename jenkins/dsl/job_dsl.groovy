@@ -16,10 +16,18 @@ pipelineJob('lior_frontend') {
     }
 }
 
-pipelineJob('deoploy') {
+pipelineJob('deploy') {
     definition {
         cps {
             script(readFileFromWorkspace('jenkins/dsl/deploy.groovy'))
+        }
+    }
+}
+
+pipelineJob('ssh_configuration') {
+    definition {
+        cps {
+            script(readFileFromWorkspace('jenkins/dsl/ssh_configuration.groovy'))
         }
     }
 }

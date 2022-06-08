@@ -1,24 +1,24 @@
 pipeline {
   agent any
 
+  environment {
+      ANSIBLE_CONFIG   = 'ansible/ansible.cfg'
+      INVENTORY        = 'ansible/inventory/hosts.ini'
+      PLAYBOOK         = 'ansible/00_deploy-lior.yaml'
+  }
+
   stages {
     stage('Init') {
       steps {
         // Get some code from a GitHub repository
-        git 'https://github.com/linoleparquet/portfolio-project'
-        sh 'ansible-galaxy install -r portfolio-project/ansible/collections/requirements.yml'
-      }
-  }
-
-    stage('Clees SSH') {
-      steps {
-          sh ''
+        git url:'https://github.com/linoleparquet/portfolio-project', branch: 'main'
+        sh "ansible-galaxy install -r ansible/collections/requirements.yml"
       }
   }
 
     stage('Deploy'){
         steps {
-            sh 'ANSIBLE_CONFIG=portfolio-project/ansible/ansible.cfg ansible-playbook -i portfolio-project/ansible/inventory/hosts.ini portfolio-project/ansible/00_deploy-lior.yaml'
+            sh "ANSIBLE_CONFIG=${env.ANSIBLE_CONFIG} ansible-playbook -i ${env.INVENTORY} ${env.PLAYBOOK}"
         }
     }
 

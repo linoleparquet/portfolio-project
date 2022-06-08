@@ -42,10 +42,6 @@ Vagrant.configure("2") do |config|
     c.vm.provision "file", source: "jenkins/controller", destination: "$HOME/docker-compose/jenkins/controller"
     c.vm.provision "shell", path: "vagrant/1_docker_jenkins.sh"
 
-    # Ansible 
-    c.vm.provision "file", source: "ansible", destination: "$HOME/ansible"
-    c.vm.provision "shell", path: "vagrant/2_ansible.sh"
-
   end
   
 end

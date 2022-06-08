@@ -6,4 +6,6 @@ ENV PLUGINS_FORCE_UPGRADE=true
 USER root
 RUN apt-get update
 RUN apt-get install ansible vim -y
+# TODO: Refacto the usage of ssh-copy-id to get rid of sshpass
+RUN apt-get install sshpass -y
 USER jenkins
