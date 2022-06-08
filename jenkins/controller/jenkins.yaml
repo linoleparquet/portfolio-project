@@ -14,13 +14,13 @@ jobs:
           git {
             branches('*/main')
             remote {
-              url('https://github.com/linoleparquet/jenkins-dsl.git')
+              url('https://github.com/linoleparquet/portfolio-project.git')
             }
           }
         }
         steps {
           dsl {
-            external('job_dsl.groovy')
+            external('jenkins/dsl/job_dsl.groovy')
             removeAction('DELETE')
             ignoreExisting(ignore = false)
             removeViewAction('DELETE')
