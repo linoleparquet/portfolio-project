@@ -1,9 +1,17 @@
 import org.jenkinsci.plugins.scriptsecurity.scripts.ScriptApproval
 
+pipelineJob('ssh_configuration') {
+    definition {
+        cps {
+            script(readFileFromWorkspace('jenkins/dsl/01_ssh_configuration.groovy'))
+        }
+    }
+}
+
 pipelineJob('lior_backend') {
     definition {
         cps {
-            script(readFileFromWorkspace('jenkins/dsl/lior_backend.groovy'))
+            script(readFileFromWorkspace('jenkins/dsl/02_lior_backend.groovy'))
         }
     }
 }
@@ -11,7 +19,7 @@ pipelineJob('lior_backend') {
 pipelineJob('lior_frontend') {
     definition {
         cps {
-            script(readFileFromWorkspace('jenkins/dsl/lior_frontend.groovy'))
+            script(readFileFromWorkspace('jenkins/dsl/03_lior_frontend.groovy'))
         }
     }
 }
@@ -19,15 +27,15 @@ pipelineJob('lior_frontend') {
 pipelineJob('deploy') {
     definition {
         cps {
-            script(readFileFromWorkspace('jenkins/dsl/deploy.groovy'))
+            script(readFileFromWorkspace('jenkins/dsl/04_deploy.groovy'))
         }
     }
 }
 
-pipelineJob('ssh_configuration') {
+pipelineJob('deploy') {
     definition {
         cps {
-            script(readFileFromWorkspace('jenkins/dsl/ssh_configuration.groovy'))
+            script(readFileFromWorkspace('jenkins/dsl/entire_pipeline.groovy'))
         }
     }
 }
