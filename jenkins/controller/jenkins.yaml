@@ -16,7 +16,7 @@ jenkins:
           password: admin
 jobs:
   - script: |
-      job('init') {
+      job('initialise_pipeline_jobs') {
         description('Set up all jobs')
           
         scm {
