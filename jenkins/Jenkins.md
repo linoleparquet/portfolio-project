@@ -1,21 +1,20 @@
-# Get admin password
+# Jenkins
 
-docker exec jenkins_controller cat /var/jenkins_home/secrets/initialAdminPassword
+## Jenkins as Code
 
-# How to build the images
+The plugin JasC load the automatically load the configuration of Jenkins at his start up.
+The configuration is stored in the jenkins.yaml file, loaded in the Jenkins controller container.
+This automate the action of inserting credentials throught the UI, adding an Agent, define the number of jenkins executors, etc.
 
-To build the frontend image, you need to manually create a new jenkins item called "Pipeline". You can name it as you want. Let's call it `lior-frontend`.
-Reach the pipeline tab. Copy paste the content of the `lior-frontend/Jenkinsfile` file in the 'Script' block. Save.
-Click on "Build Now".
-The corresponding git project will be downloaded, build as a docker image, and pushed to the docker registry.
-It will be available on the docker registry, named as `registry:5000/lior-frontend`
-To pull it, call the following command: `docker pull registry:5000/lior-frontend`
+## DSL Jobs
 
-Repeat thoses steps to build the lior-backend image, with the content of `lior-backend/Jenkinsfile`
+The DSL Job plugin allows the pipeline to be automatically created.
+The first job, called job_dsl, is defined in the jenkins.yaml file. It execute what's defined in the job_dsl.groovy file, which consit on creating the others pipelines.
 
-# TODO:
+## Pipeline executions
 
-- Tend on a unique reusable pipeline for front and back end build
-- Use Jenkinsfile variables: registry, name, version of the build
-- Automate the creation of the Jenkins pipelines
+Only one pipeline is meant to be launched by hand: `entire_pipeline`. This job encapsulate the other ones.
+
+## TODO:
+
 - Use Jenkins agent

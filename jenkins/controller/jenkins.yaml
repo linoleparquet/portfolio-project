@@ -8,6 +8,7 @@ credentials:
               scope: GLOBAL
               username: "vagrant"
 jenkins:
+  numExecutors: 10
   securityRealm:
     local:
       allowsSignup: false
@@ -16,7 +17,7 @@ jenkins:
           password: admin
 jobs:
   - script: |
-      job('initialise_pipeline_jobs') {
+      job('job_dsl') {
         description('Set up all jobs')
           
         scm {

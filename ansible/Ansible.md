@@ -1,24 +1,18 @@
-# Recreate the machine and SSH into it
+# Ansible
 
-vagrant destroy -f;
-vagrant up;
+## Playbook
 
-ssh-keygen -f "/home/lino/.ssh/known_hosts" -R "192.168.33.11";
-ssh-keygen -f "/home/lino/.ssh/known_hosts" -R "192.168.33.12";
-ssh-keygen -f "/home/lino/.ssh/known_hosts" -R "192.168.33.13";
+One playbook exist, named `00_deploy-lior.yaml`.
+It install K3S on a cluster of 3 machines, deploy ArgoCD on top of it, and deploy Lior as an Argo Application.
+The sum of thoses actions lead to the deployment of Lior of 3 completely new and fresh ubuntu machines.
 
-sshpass -p vagrant ssh-copy-id vagrant@192.168.33.11;
-sshpass -p vagrant ssh-copy-id vagrant@192.168.33.12;
-sshpass -p vagrant ssh-copy-id vagrant@192.168.33.13;
+## Roles
 
-# Pre-requises:
-
-# Ansible configuration
-
-move group vars in to inventory/group_vars
-
-# Deploy argo
-
-ansible-galaxy install -r ansible/collections/requirements.yml
-
-ANSIBLE_CONFIG=/ansible/ansible.cfg ansible-playbook -i ansible/inventory/hosts.ini ansible/00_deploy-lior.yaml
+| Name     | Origin                                               | Definition                                                                 |
+| -------- | ---------------------------------------------------- | -------------------------------------------------------------------------- |
+| Argo     | custom                                               | Deploy [ArgoCD](https://github.com/argoproj/argo-cd) on a k8s cluster      |
+| download | [k3s-ansible](https://github.com/k3s-io/k3s-ansible) | Download k3s binaires                                                      |
+| k3s      | [k3s-ansible](https://github.com/k3s-io/k3s-ansible) | Enable K3S as a Service on the master node, and configure the slaves nodes |
+| lior     | custom                                               | Deploy Lior on a k8s cluster, as an Argo Application                       |
+| prereq   | [k3s-ansible](https://github.com/k3s-io/k3s-ansible) | Check the prerequise to install K3S                                        |
+| reset    | [k3s-ansible](https://github.com/k3s-io/k3s-ansible) | Uninstall K3s                                                              |

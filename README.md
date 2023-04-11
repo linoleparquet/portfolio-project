@@ -21,3 +21,5 @@ The CD will deploy the application on a Kubernetes cluster thanks to ArgoCD
 
 To provision the infrastructure, Make sure [Vagrant can run with libvrit on your machine](https://computingforgeeks.com/using-vagrant-with-libvirt-on-linux/).
 Then run `vagrant up`
+
+ip -br -c a

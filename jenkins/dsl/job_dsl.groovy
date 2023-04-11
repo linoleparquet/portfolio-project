@@ -1,5 +1,3 @@
-import org.jenkinsci.plugins.scriptsecurity.scripts.ScriptApproval
-
 pipelineJob('01_ssh_configuration') {
     definition {
         cps {
@@ -38,11 +36,4 @@ pipelineJob('entire_pipeline') {
             script(readFileFromWorkspace('jenkins/dsl/entire_pipeline.groovy'))
         }
     }
-}
-
-// https://stackoverflow.com/a/55940005/13630006
-// Useless ??
-ScriptApproval scriptApproval = ScriptApproval.get()
-scriptApproval.pendingScripts.each {
-    scriptApproval.approveScript(it.hash)
 }
