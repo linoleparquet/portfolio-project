@@ -15,6 +15,17 @@ jenkins:
       users:
         - id: admin
           password: admin
+security:
+  globalJobDslSecurityConfiguration:
+    useScriptSecurity: false
+  scriptApproval:
+    approvedScriptHashes:
+      - "SHA512:30ec95f756af073429aa458417abd103ff2a138cd892ca1b3fbce0f89713fa3ba2584cbe7fe53bb0fac36634b1e95327ab773676372c45aede478bd2f09467d6"
+      - "SHA512:3c5e68ba0db6dc6b521295ea61aa77cc34074a10a222b5daa5f873f0a9dcfd03edfefd31392f4f8f8e598f1149a271f0f72872a6b4723033fec8afc51c8e136a"
+      - "SHA512:5b3666a6bf946d05105870c778dc0d88a05ef2c54dbae0158f520406872c7ef6cd7be970237c19642bf3589068459b1dbd50658a1c31ab57c9427f257afb1c79"
+      - "SHA512:a07a57b52882cb4bd349433faf3c69960047905ac9f3e7ffdee381131ac852f934a815863a99213b643207cc841b890aa6dd5a945b29238534228f4dc384d2fe"
+      - "SHA512:c061c9cf31a3d5bd25ee8d97fde02ee9f6043999e0b95b04d2658b0fcb83dd84cafcce657d4e2d37453e11a3e8cd5cff3c10233cbd940aeafb7430a1242eb195"
+      - "SHA512:eb609108debeae7b029a80b08116b97588ff220199834f62002d1c28ecf99b136d564a2d93765b9c666cfb8d01ccd333c8cf79d9442f1e9dda7e09a08d1e40eb"
 jobs:
   - script: |
       job('job_dsl') {

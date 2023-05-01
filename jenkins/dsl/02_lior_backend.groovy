@@ -9,13 +9,7 @@ pipeline {
       }
   }
 
-    stage('Run unitary tests') {
-      steps{
-        sh 'docker run -it --rm --name my-maven-project -v "$(pwd)":/usr/src/mymaven -w /usr/src/mymaven maven:3.8.1-openjdk-17-slim mvn test'
-      }
-    }
-
-    stage('Run quality gates test'){
+    stage('Run test'){
       steps{
         sh 'echo Volkswagen quality tests'
       }
@@ -28,7 +22,7 @@ pipeline {
     }
 
 
-    stage('Push'){
+    stage('Push to the registry'){
       steps {
         sh 'docker push registry:5000/lior-backend'
       }

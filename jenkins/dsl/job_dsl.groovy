@@ -37,6 +37,3 @@ pipelineJob('entire_pipeline') {
         }
     }
 }
-
-// Disable Script Security
-jenkins.model.Jenkins.instance.setDisableScriptSecurity(true)
