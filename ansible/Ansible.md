@@ -10,7 +10,7 @@ The sum of thoses actions lead to the deployment of Lior of 3 completely new and
 
 | Name     | Origin                                               | Definition                                                                 |
 | -------- | ---------------------------------------------------- | -------------------------------------------------------------------------- |
-| Argo     | custom                                               | Deploy [ArgoCD](https://github.com/argoproj/argo-cd) on a k8s cluster      |
+| argo     | custom                                               | Deploy [ArgoCD](https://github.com/argoproj/argo-cd) on a k8s cluster      |
 | download | [k3s-ansible](https://github.com/k3s-io/k3s-ansible) | Download k3s binaires                                                      |
 | k3s      | [k3s-ansible](https://github.com/k3s-io/k3s-ansible) | Enable K3S as a Service on the master node, and configure the slaves nodes |
 | lior     | custom                                               | Deploy Lior on a k8s cluster, as an Argo Application                       |

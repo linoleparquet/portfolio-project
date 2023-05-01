@@ -11,12 +11,12 @@
     update_cache: yes
     cache_valid_time: 3600
 
-- name: Install kubernetes pip package
+- name: Install Kubernetes pip package
   pip:
     name: kubernetes
     state: present
 
-- name: Create the Argo namespace
+- name: Create Argo Namespace
   kubernetes.core.k8s:
     name: argocd
     api_version: v1

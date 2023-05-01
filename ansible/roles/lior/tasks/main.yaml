@@ -1,4 +1,4 @@
-- name: Create namespace lior
+- name: Create Namespace lior
   kubernetes.core.k8s:
     name: lior
     api_version: v1
@@ -6,7 +6,7 @@
     state: present
     kubeconfig: /etc/rancher/k3s/k3s.yaml
 
-- name: Deploy Lior application
+- name: Deploy Lior on k3s cluster
   kubernetes.core.k8s:
     kubeconfig: /etc/rancher/k3s/k3s.yaml
     state: present
@@ -30,7 +30,7 @@
                 value: "true"
         project: default
 
-- name: Wait till Argo is fully up
+- name: Wait untill Argo is available on the cluster
   kubernetes.core.k8s_info:
     kubeconfig: /etc/rancher/k3s/k3s.yaml
     kind: Pod
@@ -68,7 +68,7 @@
       spec:
         type: ClusterIP
 
-- name: Wait till Lior is fully up
+- name: Wait untill Lior is available
   kubernetes.core.k8s_info:
     kubeconfig: /etc/rancher/k3s/k3s.yaml
     kind: Pod
