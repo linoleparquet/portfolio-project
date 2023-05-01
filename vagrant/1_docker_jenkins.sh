@@ -11,3 +11,4 @@ echo '[2] Deploy Jenkins and Docker registry'
 docker-compose -f docker-compose/docker-compose.yaml up --build -d&>/dev/null
 
 echo 'END - Configure CI/CD Machine'
+echo 'Jenkins is available at http://192.168.33.10'

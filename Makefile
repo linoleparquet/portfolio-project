@@ -9,7 +9,3 @@ provision_vm: ## Provision VMs defined in the Vagrantfile
 
 destroy_vm: ## Destroy VMs defined in the Vagrantfile
 	vagrant destroy -f
-
-jenkins_local: ## Deploy a Jenkins contoller and agent on the local machine
-	docker-compose build --no-cache
-	docker-compose up -d
