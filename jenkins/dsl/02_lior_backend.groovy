@@ -4,7 +4,7 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        // Get some code from a GitHub repository
+        // Get code from the GitHub repository
         git 'https://github.com/linoleparquet/lior-backend'
       }
   }
@@ -22,7 +22,9 @@ pipeline {
     }
 
     stage('Build the Docker image'){
+      steps{
         sh 'docker build . -t registry:5000/lior-backend'
+      }
     }
 
 

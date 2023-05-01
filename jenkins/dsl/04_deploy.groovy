@@ -10,7 +10,7 @@ pipeline {
   stages {
     stage('Init') {
       steps {
-        // Get some code from a GitHub repository
+        // Get code from the GitHub repository
         git url:'https://github.com/linoleparquet/portfolio-project', branch: 'main'
         sh "ansible-galaxy install -r ansible/collections/requirements.yml"
       }
