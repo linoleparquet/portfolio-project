@@ -5,7 +5,9 @@ pipeline {
     stage('Checkout') {
       steps {
         // Get code from the GitHub repository
-        git 'https://github.com/linoleparquet/lior-frontend'
+        checkout([$class: 'GitSCM', 
+          branches: [[name: 'refs/tags/v1.1.1']], 
+          userRemoteConfigs: [[url: 'https://github.com/linoleparquet/lior-frontend']]])
       }
   }
 
@@ -17,14 +19,14 @@ pipeline {
 
     stage('Build the Docker image'){
       steps{
-        sh 'docker build . -t registry:5000/lior-frontend'
+        sh 'docker build . -t registry:5000/lior-frontend:v1.1.1'
       }
     }
 
 
     stage('Push to the registry'){
       steps {
-        sh 'docker push registry:5000/lior-frontend'
+        sh 'docker push registry:5000/lior-frontend:v1.1.1'
       }
     }
 
