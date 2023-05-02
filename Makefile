@@ -9,3 +9,10 @@ provision_vm: ## Provision VMs defined in the Vagrantfile
 
 destroy_vm: ## Destroy VMs defined in the Vagrantfile
 	vagrant destroy -f
+
+deploy_lior: ## Deploy the K3s cluster, Argo, and Lior as an Argo application using Jenkins
+	curl -X POST http://192.168.33.10/job/job_dsl/build
+	sleep 10
+	curl -X POST http://192.168.33.10/job/01_ssh_configuration/build
+	sleep 10
+	curl -X POST http://192.168.33.10/job/04_deploy/build

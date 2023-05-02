@@ -15,6 +15,13 @@ The first job, called job_dsl, is defined in the jenkins.yaml file. It execute w
 
 Only one pipeline is meant to be launched by hand: `entire_pipeline`. This job encapsulate the other ones.
 
+## Trigger a Jenkins build throught HTTP
+
+curl -X POST http://192.168.33.10/job/job_dsl/build
+curl -X POST http://192.168.33.10/job/01_ssh_configuration/build
+curl -X POST http://192.168.33.10/job/04_deploy/build
+This can be done because I disabled CSRF Protection for simplicity
+
 ## TODO:
 
 - Use Jenkins agent
