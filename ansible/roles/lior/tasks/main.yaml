@@ -28,8 +28,11 @@
             parameters:
               - name: ingress.enabled
                 value: "true"
+              # insecure registry
               # - name: backend.image.repository
-              #   value: 192.168.33.10:5000/lior-backend:v1.0.0
+              #   value: 192.168.33.10:5000/lior-backend
+              # - name: frontend.image.repository
+              #   value: 192.168.33.10:5000/lior-frontend
         project: default
 
 - name: Wait untill Argo is available on the cluster
