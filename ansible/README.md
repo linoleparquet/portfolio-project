@@ -1,9 +1,24 @@
+<p>
+    <img
+        src="https://upload.wikimedia.org/wikipedia/commons/2/24/Ansible_logo.svg"
+        alt="Ansible"
+        width="40"
+        height="40"
+        align="right"
+    />
+</p>
+
 # Ansible
+
+## Inventory
+
+Two groups are defined in the inventory: the master group and the node group.  
+They represent the master and the node of a k8s cluster.
 
 ## Playbook
 
-One playbook exist, named `00_deploy-lior.yaml`.
-It install K3S on a cluster of 3 machines, deploy ArgoCD on top of it, and deploy Lior as an Argo Application.
+The main playbook is called `00_deploy-lior.yaml`.  
+It install K3S on a cluster of 3 machines, deploy ArgoCD on top of it, and deploy Lior as an Argo Application.  
 The sum of thoses actions lead to the deployment of Lior of 3 completely new and fresh ubuntu machines.
 
 ## Roles

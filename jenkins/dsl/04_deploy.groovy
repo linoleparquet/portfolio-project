@@ -8,7 +8,7 @@ pipeline {
   }
 
   stages {
-    stage('Downloading Ansible collections requierements ') {
+    stage('Downloading Ansible collections requirements ') {
       steps {
         echo ""
         // Get code from the GitHub repository

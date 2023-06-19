@@ -18,6 +18,7 @@ jenkins:
 security:
   globalJobDslSecurityConfiguration:
     useScriptSecurity: false
+  # Hashes of the scripts defined on the dsl folder
   scriptApproval:
     approvedScriptHashes:
       - "SHA512:25062d0cc1c80fae229489e04834c394d9364558ecd35069e2c885cb57866dd7543ff26036a0459c213b3bcf8e65058de4f2d13993d3f84acc4d7004216df21f"

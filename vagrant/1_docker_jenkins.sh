@@ -1,3 +1,5 @@
+#!/bin/sh
+
 echo 'START - Configure CI/CD Machine'
 
 export DEBIAN_FRONTEND=noninteractive

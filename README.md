@@ -1,5 +1,7 @@
 # Goal of the project
 
+![Deployment](images/deployment.png)
+
 Show off technical skills
 
 Deploy a CI/CI Jenkins Server
