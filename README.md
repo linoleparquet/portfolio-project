@@ -28,11 +28,17 @@ The goal of this project is to showcase my abilities in various technologies and
 
 ![Provisionning](images/provisionning.png)
 
-- Jenkins execute an Ansible role to install Kubernetes on the clutser,
-- The same role deploy ArgoCD on the cluster
-- ArgoCD fetch and deploy the Lior Helm Chart
+- Jenkins execute an Ansible role on the DEV-NODE-1, DEV-NODE-2, and DEV-MASTER machines. It deploy K3s and Argo on top of it.
+- ArgoCD fetch the Lior Helm Chart from GitHub and deploy it
 
 ![Deployment](images/deployment.png)
+
+## Machines
+
+### CI/CD Machine
+
+The CI/CD Machine is responsible for hosting Jenkins and the Docker Registry.  
+These two services are deployed using Docker Compose.
 
 ## Prerequisites
 
